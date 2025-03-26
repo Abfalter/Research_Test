@@ -1,0 +1,21 @@
+name: Code Metrics
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  analyze_code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Count Lines of Code
+        run: git ls-files | xargs wc -l
+
+      - name: Track Code Churn
+        run: >-
+          git log --pretty=tformat: --numstat | 
+          awk '{ added += $1; removed += $2 } END { print "Added:", added, "Removed:", removed }'
