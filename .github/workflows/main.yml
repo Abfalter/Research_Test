@@ -18,12 +18,14 @@ jobs:
         run: echo "Lines of code:" > code_metrics.txt && git ls-files -z | xargs -0 wc -l >> code_metrics.txt && echo "\n" >> code_metrics.txt
 
       - name: Track Code Churn
-        run: >-
-          git log --numstat -M -C | 
+        run: >
+          echo -e "\nCode Churn:" >> code_metrics.txt &&
+          git log -1 --numstat -M -C -- "*.gml" | 
           awk '{ added += $1; removed += $2 } END { print "Added:", added, "Removed:", removed }'
       - name: Save Code Churn Data
         run: >
-          git log --numstat -M -C | 
+          echo -e "\nCode Churn:" >> code_metrics.txt &&
+          git log -1 --numstat -M -C -- "*.gml" | 
           awk '{ added += $1; removed += $2 } END { print "Added:", added, "Removed:", removed }' >> code_metrics.txt
 
       - name: Upload Metrics File
