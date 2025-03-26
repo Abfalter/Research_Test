@@ -15,7 +15,7 @@ jobs:
       - name: Count Lines of Code
         run: git ls-files | xargs wc -l
       - name: Save Line of Code Data
-        run: echo "Lines of code:" > code_metrics.txt && git ls-files | xargs wc -l >> code_metrics.txt && echo "\n" >> code_metrics.txt
+        run: echo "Lines of code:" > code_metrics.txt && git ls-files | xargs -0 wc -l >> code_metrics.txt && echo "\n" >> code_metrics.txt
 
       - name: Track Code Churn
         run: >-
