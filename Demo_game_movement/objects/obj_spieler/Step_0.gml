@@ -15,8 +15,3 @@ if keyboard_check(vk_right)
 	x+= geschwindigkeit;
 }
 
-if keyboard_check(vk_enter)
-{
-	show_debug_message("Enter was pressed, wooah");
-}
-
