@@ -12,3 +12,6 @@ if place_meeting(x,y,obj_boden)
 {
 	game_end();
 }
+
+//added a line here
+x = x;
