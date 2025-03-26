@@ -19,11 +19,11 @@ jobs:
 
       - name: Track Code Churn
         run: >-
-          git log --pretty=tformat: --numstat | 
+          git log --pretty=tformat: --numstat --diff-filter=ACDMRT -- "*.gml" | 
           awk '{ added += $1; removed += $2 } END { print "Added:", added, "Removed:", removed }'
       - name: Save Code Churn Data
         run: >
-          git log --pretty=tformat: --numstat | 
+          git log --pretty=tformat: --numstat --diff-filter=ACDMRT -- "*.gml" | 
           awk '{ added += $1; removed += $2 } END { print "Added:", added, "Removed:", removed }' >> code_metrics.txt
 
       - name: Upload Metrics File
