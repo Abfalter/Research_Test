@@ -19,3 +19,13 @@ jobs:
         run: >-
           git log --pretty=tformat: --numstat | 
           awk '{ added += $1; removed += $2 } END { print "Added:", added, "Removed:", removed }'
+      - name: Save Code Churn Data
+        run: >
+          git log --pretty=tformat: --numstat | 
+          awk '{ added += $1; removed += $2 } END { print "Added:", added, "Removed:", removed }' > code_metrics.txt
+
+      - name: Upload Metrics File
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-metrics
+          path: code_metrics.txt
