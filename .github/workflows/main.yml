@@ -13,9 +13,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Count Lines of Code
-        run: git ls-files | xargs -0 wc -l
+        run: git ls-files -z | xargs -0 wc -l
       - name: Save Line of Code Data
-        run: echo "Lines of code:" > code_metrics.txt && git ls-files | xargs -0 wc -l >> code_metrics.txt && echo "\n" >> code_metrics.txt
+        run: echo "Lines of code:" > code_metrics.txt && git ls-files -z | xargs -0 wc -l >> code_metrics.txt && echo "\n" >> code_metrics.txt
 
       - name: Track Code Churn
         run: >-
