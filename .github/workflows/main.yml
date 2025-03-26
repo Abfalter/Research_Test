@@ -15,7 +15,7 @@ jobs:
       - name: Count Lines of Code
         run: git ls-files | xargs wc -l
       - name: Save Line of Code Data
-        run: git ls-files | xargs wc -l > code_metrics.txt
+        run: echo "Lines of code:" > code_metrics.txt && git ls-files | xargs wc -l >> code_metrics.txt && echo "\n" >> code_metrics.txt
 
       - name: Track Code Churn
         run: >-
@@ -24,7 +24,7 @@ jobs:
       - name: Save Code Churn Data
         run: >
           git log --pretty=tformat: --numstat | 
-          awk '{ added += $1; removed += $2 } END { print "Added:", added, "Removed:", removed }' > code_metrics.txt
+          awk '{ added += $1; removed += $2 } END { print "Added:", added, "Removed:", removed }' >> code_metrics.txt
 
       - name: Upload Metrics File
         uses: actions/upload-artifact@v4
